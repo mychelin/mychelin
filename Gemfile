@@ -15,3 +15,4 @@ gem "bootstrap-sass", ">= 2.1.0.1"
 gem "omniauth", ">= 1.1.1"
 gem "omniauth-facebook"
 gem "quiet_assets", ">= 1.0.1", :group => :development
+gem "database_cleaner", :group => [:development, :test]
