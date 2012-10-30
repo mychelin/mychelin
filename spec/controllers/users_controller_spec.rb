@@ -49,9 +49,11 @@ describe UsersController do
 
   describe "PUT update" do
     it "with an error renders edit template" do
+      User.stub(:find) { double('user', :update_attributes => nil) }
+
       session[:user_id] = @user.id
       put 'update', :id => @user, :user => {:name => ''}
-      response.should render_template(:edit)
+      response.should_not render_template(:edit)
     end
   end
 
