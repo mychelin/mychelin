@@ -17,4 +17,5 @@ gem "omniauth-facebook"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "database_cleaner", :group => [:development, :test]
 
+gem "bigdecimal"
 gem "mysql2", ">= 0.3.11", :group => :production
