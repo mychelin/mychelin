@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to '/auth/facebook'
+    redirect_to "#{relative_url_root}/auth/facebook"
   end
 
 
