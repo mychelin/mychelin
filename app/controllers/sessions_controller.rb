@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to "#{relative_url_root}/auth/facebook"
+    render 'signin'
   end
-
 
   def create
     auth = request.env["omniauth.auth"]
