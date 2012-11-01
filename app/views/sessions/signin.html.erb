@@ -1,9 +1,0 @@
-<p>
-  <%= link_to "Facebook",  "#{controller.relative_url_root}/auth/facebook" %>
-</p>
-
-<% unless Rails.env.production? %>
-<p>
-  <%= link_to "Developer", "#{controller.relative_url_root}/auth/developer" %>
-</p>
-<% end %>
