@@ -5,6 +5,13 @@
     %th Name
     %th Tel
     %th Url
+    %th Location
+    %th Address
+    %th Business hour
+    %th Holiday
+    %th Capacity
+    %th Credit
+    %th Parking
     %th
     %th
     %th
@@ -14,6 +21,13 @@
       %td= restaurant.name
       %td= restaurant.tel
       %td= restaurant.url
+      %td= restaurant.location
+      %td= restaurant.address
+      %td= restaurant.business_hour
+      %td= restaurant.holiday
+      %td= restaurant.capacity
+      %td= restaurant.credit
+      %td= restaurant.parking
       %td= link_to 'Show', restaurant
       %td= link_to 'Edit', edit_restaurant_path(restaurant)
       %td= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }
