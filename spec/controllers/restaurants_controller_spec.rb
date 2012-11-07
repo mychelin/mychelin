@@ -24,7 +24,16 @@ describe RestaurantsController do
   # Restaurant. As you add validations to Restaurant, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:name => 'ryumon',
+     :tel => 'a',
+     :url => 'a',
+     :location => '(2.2, 2.2)',
+     :address => 'a',
+     :business_hour => 'a',
+     :holiday => 'a',
+     :capacity => 50,
+     :credit => true,
+     :parking => true}
   end
 
   # This should return the minimal set of values that should be in the session
