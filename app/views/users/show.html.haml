@@ -1,5 +1,8 @@
-%h3 User
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+#profile
+  .row
+    .span6
+      %h3 #{@user.name}
+      %p
+        #{@user.email if @user.email}
+    .span3
+      = link_to 'Edit', edit_user_path(@user)
