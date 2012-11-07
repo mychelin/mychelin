@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+before_filter :admin_user?, :only => [:destroy]
+
   # GET /restaurants
   # GET /restaurants.json
   def index

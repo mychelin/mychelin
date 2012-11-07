@@ -19,4 +19,5 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "database_cleaner", :group => [:development, :test]
 
 gem "bigdecimal"
+gem "factory_girl", ">= 4.1.0", :group => [:development, :test]
 gem "mysql2", ">= 0.3.11", :group => :production

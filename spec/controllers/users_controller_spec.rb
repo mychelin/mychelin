@@ -1,9 +1,10 @@
 require 'spec_helper'
+require 'factory_girl'
 
 describe UsersController do
 
   before do
-    @user = create(:user)
+    @user = FactoryGirl.create(:people)
   end
 
   describe "Get 'show' for non-logged in user" do
@@ -50,11 +51,9 @@ describe UsersController do
   describe "PUT update" do
     it "with an error renders edit template" do
       User.stub(:find) { double('user', :update_attributes => nil) }
-
       session[:user_id] = @user.id
       put 'update', :id => @user, :user => {:name => ''}
       response.should_not render_template(:edit)
     end
   end
-
 end
