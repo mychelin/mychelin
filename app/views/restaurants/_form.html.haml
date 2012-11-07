@@ -15,26 +15,34 @@
   .field
     = f.label :url
     = f.text_field :url
-  .field
-    = f.label :location
-    = f.text_field :location
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :business_hour
-    = f.text_area :business_hour
-  .field
-    = f.label :holiday
-    = f.text_area :holiday
-  .field
-    = f.label :capacity
-    = f.number_field :capacity
-  .field
-    = f.label :credit
-    = f.check_box :credit
-  .field
-    = f.label :parking
-    = f.check_box :parking
+  #details-wrapper.accordion
+    .accordion-group
+      .accordion-heading
+        %a{:class => "accordion-toggle", 'data-toggle' => "collapse",
+           'data-parent' => "form #details-wrapper", :href => "#details"}
+          More
+      #details.accordion-body.collapse
+        .accordion-inner
+          .field
+            = f.label :location
+            = f.text_field :location
+          .field
+            = f.label :address
+            = f.text_field :address
+          .field
+            = f.label :business_hour
+            = f.text_area :business_hour, :rows => '2'
+          .field
+            = f.label :holiday
+            = f.text_area :holiday, :rows => '2'
+          .field
+            = f.label :capacity
+            = f.number_field :capacity
+          .field
+            = f.label :credit
+            = f.check_box :credit
+          .field
+            = f.label :parking
+            = f.check_box :parking
   .actions
     = f.submit 'Save'
