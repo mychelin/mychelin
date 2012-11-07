@@ -29,12 +29,14 @@ ActiveRecord::Schema.define(:version => 20121106230655) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.string   "name",                          :null => false
     t.string   "email"
     t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "uid",                           :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "role",       :default => "nil"
+    t.string   "icon",       :default => "nil"
   end
 
 end
