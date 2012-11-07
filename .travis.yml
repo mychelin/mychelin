@@ -3,3 +3,6 @@ before_script: "bundle exec rake db:migrate"
 language: ruby
 rvm:
   - 1.9.3
+branches:
+  only:
+    - master
