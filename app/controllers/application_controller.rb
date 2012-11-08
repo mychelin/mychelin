@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def admin_user?
+      unless current_user[:role] == "admin"
+        flash[:error] = "You are not administrator. Please send request by email."
+        redirect_to :action => "index"
+      end
+    end
+
 end

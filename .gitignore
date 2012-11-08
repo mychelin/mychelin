@@ -75,3 +75,9 @@ pickle-email-*.html
 
 # vim artifacts
 **.swp
+
+# emacs artifacts
+**~
+
+# Dia autosave files
+**.autosave

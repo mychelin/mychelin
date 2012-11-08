@@ -4,13 +4,13 @@ describe SessionsController do
 
   before(:each) do
     OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = {
-      'uid' => '12345',
-      'provider' => 'facebook',
-      'info' => {
-        'name' => 'Bob'
-      }
-    }
+    omniauth_hash = FactoryGirl.attributes_for(:people)
+    OmniAuth.config.add_mock(:facebook, omniauth_hash)
+    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+  end
+
+  after do
+    OmniAuth.config.test_mode = false
   end
 
   describe "GET 'new'" do
@@ -22,15 +22,14 @@ describe SessionsController do
 
   describe "creates new user" do
     it "redirects new users with blank email to fill in their email" do
-      @user = create(:user)
+      @user = FactoryGirl.create(:user)
       visit '/auth/facebook'
       current_path.should == edit_user_path(@user)
     end
     it "redirects users with email back to root_url" do
-      pending
-      @user = create(:user, :email => "Tester@testing.com")
+      @user = FactoryGirl.create(:user, :email => "Tester@testing.com")
       visit '/auth/facebook'
-      current_path.should == '/'
+      current_path.should == "/users/#{@user.id}"
     end
   end
 

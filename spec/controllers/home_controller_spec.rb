@@ -4,9 +4,8 @@ describe HomeController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      pending
       get 'index'
-      response.should be_success
+      response.should redirect_to(:signin)
     end
   end
 
