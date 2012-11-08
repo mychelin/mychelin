@@ -20,3 +20,5 @@ gem "database_cleaner", :group => [:development, :test]
 
 gem "bigdecimal"
 gem "mysql2", ">= 0.3.11", :group => :production
+
+gem 'ruby-debug19', :group => [:development, :test]
