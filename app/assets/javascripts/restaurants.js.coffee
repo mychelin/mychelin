@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('body.restaurants.new').ready ->
-    initialize()
+  $('body.restaurants.new').ready ($) ->
+    map = new $.Map()
+    map.display()
 
-  map = $('body.restaurants #map_canvas')
-  map.ready ->
-    map.height(map.width())
+  map_canvas = $('body.restaurants #map_canvas')
+  map_canvas.ready ->
+    map_canvas.height(map_canvas.width())
