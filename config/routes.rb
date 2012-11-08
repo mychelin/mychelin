@@ -1,4 +1,6 @@
 Mychelin::Application.routes.draw do
+  get "service/list_restaurants"
+
   resources :restaurants
 
   root :to => "home#index"
@@ -7,4 +9,6 @@ Mychelin::Application.routes.draw do
   match '/signin' => 'sessions#new', :as => :signin
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/auth/failure' => 'sessions#failure'
+
+  get '/service/restaurants' => 'service#google_places'
 end
