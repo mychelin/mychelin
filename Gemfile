@@ -22,4 +22,4 @@ gem "bigdecimal"
 gem "factory_girl", ">= 4.1.0", :group => [:development, :test]
 gem "mysql2", ">= 0.3.11", :group => :production
 
-gem 'ruby-debug19', :group => [:development, :test]
+#gem 'ruby-debug19', :group => [:development, :test]
