@@ -10,5 +10,5 @@ Mychelin::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/auth/failure' => 'sessions#failure'
 
-  get '/service/restaurants' => 'service#google_places'
+  get '/service/restaurants' => 'service#list_restaurants'
 end
