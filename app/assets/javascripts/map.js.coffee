@@ -1,38 +1,48 @@
 class Map
-  constructor: ->
-    options =
-      zoom: 14
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    @map = new google.maps.Map(document.getElementById("map_canvas"), options)
+  constructor: (selector, options) ->
+    if not options
+      options =
+        zoom: 14
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    @map = new google.maps.Map($(selector).get(0), options)
+
+    @cmLayer = new google.maps.KmlLayer 'http://dev.mychelin.me/kml/centerMark.kml',
+      preserveViewport: true
+      map: @map
 
   display: ->
-    map = @map
-    handleNoGeolocation = @handleNoGelocation
+    @getCurrentPosition (latitude, longitude) =>
+      @setCenter latitude, longitude
+    , () =>
+      @setCenter 35.0061, 135.76095
+
+  setCenter: (latitude, longitude) ->
+    location = new google.maps.LatLng(latitude, longitude)
+    @map.setCenter location
+
+  getCurrentPosition: (callback, error_handler) ->
+    if not error_handler
+      error_handler = () -> false
 
     # Try W3C Geolocation (Preferred)
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition((position) ->
-        initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        map.setCenter(initialLocation);
+        callback position.coords.latitude, position.coords.longitude
       , () ->
-        handleNoGeolocation(true))
+        error_handler())
 
     # Try Google Gears Geolocation
     else if google.gears
       geo = google.gears.factory.create('beta.geolocation');
 
       geo.getCurrentPosition((position) ->
-        initialLocation = new google.maps.LatLng(position.latitude,position.longitude)
-        map.setCenter(initialLocation)
+        callback position.latitude, position.longitude
       , () ->
-        handleNoGeoLocation(true))
+        error_handler())
 
     # Browser doesn't support Geolocation
     else
-      handleNoGeolocation(false)
-
-  handleNoGeolocation: (errorFlag) ->
-    initialLocation = new google.maps.LatLng(35.0061,135.76095) # kyoto
-    @map.setCenter(initialLocation)
+      error_handler()
 
 $.Map = Map
