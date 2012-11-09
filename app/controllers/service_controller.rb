@@ -1,7 +1,7 @@
 require 'net/https'
 
 class ServiceController < ApplicationController
-  def google_places
+  def list_restaurants
     latitude = params[:latitude]
     longitude = params[:longitude]
 
