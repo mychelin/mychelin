@@ -14,6 +14,8 @@ $ ->
         $('#restaurant_address').val result.formatted_address
         $('#restaurant_url').val result.url
 
+        $('#modal_form').modal('show')
+
   getPlaces = (map, latitude, longitude) ->
     $.get '/service/restaurants',
       latitude: latitude
@@ -51,4 +53,4 @@ $ ->
 
   map_canvas = $('body.restaurants #map_canvas')
   map_canvas.ready ->
-    map_canvas.height(map_canvas.width())
+    map_canvas.height(map_canvas.width() * 0.5)
