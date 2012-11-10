@@ -3,6 +3,17 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $.load_detail = (reference) ->
+    $.get '/service/restaurant/' + reference, (data) ->
+      if data.status == 'OK'
+        result = data.result
+        $('#restaurant_name').val result.name
+        loc = [result.geometry.location.lat, result.geometry.location.lng]
+        $('#restaurant_location').val (loc.join ',')
+        $('#restaurant_tel').val result.formatted_phone_number
+        $('#restaurant_address').val result.formatted_address
+        $('#restaurant_url').val result.url
+
   getPlaces = (map, latitude, longitude) ->
     $.get '/service/restaurants',
       latitude: latitude
@@ -12,13 +23,11 @@ $ ->
       if data.status == 'OK'
         restaurants_list.empty()
         for result in data.results
-          entry = $('<div>' +
-            '<h4>' + result.name + '</h4>' +
-            result.vicinity +
-          '</div>')
-          entry.click () =>
-            alert result.reference
-
+          entry = $("<li onClick=\"$.load_detail('#{ result.reference }')\">
+                       <a><h4>#{ result.name }</h4>
+                          #{ result.vicinity }
+                       </a>
+                     </li>")
           restaurants_list.append(entry)
 
           l = result.geometry.location

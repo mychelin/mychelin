@@ -2,7 +2,7 @@ class Map
   constructor: (selector, options) ->
     if not options
       options =
-        zoom: 14
+        zoom: 15
         mapTypeId: google.maps.MapTypeId.ROADMAP
 
     @map = new google.maps.Map($(selector).get(0), options)
