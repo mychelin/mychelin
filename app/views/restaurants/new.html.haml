@@ -4,12 +4,38 @@
 %h1 New restaurant
 
 .row
-  .span5
-    = render 'form'
-  .span4
+  .span9
     #map_canvas
 
     %ul#restaurants_list.nav.nav-tabs.nav-stacked
       
 
 = link_to 'Back', restaurants_path
+
+#modal_form.modal.hide.fade{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+  .modal-header
+    %button.close{:type => "button", 'data-dismiss' => "modal", 'aria-hidden' => "true"}
+      ×
+    %h3#myModalLabel このお店を追加しますか？
+
+  = form_for Restaurant.new do |f|
+    .modal-body
+      .field
+        = f.label :name
+        = f.text_field :name
+      .field
+        = f.label :tel
+        = f.text_field :tel
+      .field
+        = f.label :url
+        = f.text_field :url
+      .field
+        = f.hidden_field :location
+      .field
+        = f.label :address
+        = f.text_field :address
+     
+    .modal-footer
+      %button.btn{'data-dismiss' => "modal", 'aria-hidden' => "true"}
+        Close
+      = f.submit 'Save', :class => 'btn btn-primary'
