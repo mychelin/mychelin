@@ -11,4 +11,5 @@ Mychelin::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
 
   get '/service/restaurants' => 'service#list_restaurants'
+  get '/service/restaurant/:reference' => 'service#show_restaurant'
 end
