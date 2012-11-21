@@ -1,35 +1,41 @@
+- content_for :head do
+  = javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=true&language=ja'
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @restaurant.name
-%p
-  %b Tel:
-  = @restaurant.tel
-%p
-  %b Url:
-  = @restaurant.url
-%p
-  %b Location:
-  = @restaurant.location
-%p
-  %b Address:
-  = @restaurant.address
-%p
-  %b Business hour:
-  = @restaurant.business_hour
-%p
-  %b Holiday:
-  = @restaurant.holiday
-%p
-  %b Capacity:
-  = @restaurant.capacity
-%p
-  %b Credit:
-  = @restaurant.credit
-%p
-  %b Parking:
-  = @restaurant.parking
+.row
+  .span9
+    %h3
+      = link_to @restaurant.name, (@restaurant.url || '#')
+  .span5
+    #map_canvas{'data-mychelin-location' => @restaurant.location}
+  .span4
+    %p
+      %b Tel:
+      = link_to @restaurant.tel, 'tel:' + @restaurant.tel.gsub(/\D/, '')
+    %p
+      %b Address:
+      = @restaurant.address
+    - if @restaurant.business_hour.present?
+      %p
+        %b Business hour:
+        = @restaurant.business_hour
+    - if @restaurant.holiday.present?
+      %p
+        %b Holiday:
+        = @restaurant.holiday
+    - if @restaurant.capacity.present?
+      %p
+        %b Capacity:
+        = @restaurant.capacity
+    - unless @restaurant.credit.nil?
+      %p
+        %b Credit:
+        = @restaurant.credit ? '○' : '×'
+    - unless @restaurant.parking.nil?
+      %p
+        %b Parking:
+        = @restaurant.parking ? '○' : '×'
 
 = link_to 'Edit', edit_restaurant_path(@restaurant)
 \|

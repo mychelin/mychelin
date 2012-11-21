@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  # Helper to load detail restaurant information
   $.load_detail = (reference) ->
     $.get '/service/restaurant/' + reference, (data) ->
       if data.status == 'OK'
@@ -33,13 +34,24 @@ $ ->
           restaurants_list.append(entry)
 
           l = result.geometry.location
-          new google.maps.Marker
-            position: new google.maps.LatLng(l.lat, l.lng)
-            map: map.map
-            title: result.name
+          map.setMark(l.lat, l.lng, result.name)
 
-  $('body.restaurants.new').ready ($) =>
+  #
+  # Common in /restaurants/*
+  #
+  load_hook = []
+  load_hook.push () ->
+    map_canvas = $('body.restaurants #map_canvas')
+    map_canvas.height(map_canvas.width() * 0.5)
+
+  #
+  # /restaurants/new
+  #
+  if $('body.restaurants.new').length > 0
+    hook() for hook in load_hook
+
     map = new $.Map('#map_canvas')
+    map.markCenter();
 
     # Initialize center and get restaurants
     map.getCurrentPosition (latitude, longitude) ->
@@ -48,9 +60,17 @@ $ ->
 
     # Only get restaurants
     google.maps.event.addListener map.map, 'dragend', () =>
+      map.clearMarks()
       l = map.map.getCenter()
       getPlaces map, l.lat(), l.lng()
 
-  map_canvas = $('body.restaurants #map_canvas')
-  map_canvas.ready ->
-    map_canvas.height(map_canvas.width() * 0.5)
+  #
+  # /restaurants/show/:id
+  #
+  else if $('body.restaurants.show').length > 0
+    hook() for hook in load_hook
+
+    map = new $.Map('#map_canvas')
+    [lat, lng] = $('#map_canvas').data('mychelin-location').split(',')
+    map.setCenter(lat, lng)
+    map.setMark(lat, lng)

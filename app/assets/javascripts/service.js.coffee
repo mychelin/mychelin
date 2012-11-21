@@ -6,10 +6,23 @@ class Map
         mapTypeId: google.maps.MapTypeId.ROADMAP
 
     @map = new google.maps.Map($(selector).get(0), options)
+    @marks = []
 
+
+  markCenter: ->
     @cmLayer = new google.maps.KmlLayer 'http://dev.mychelin.me/kml/centerMark.kml',
       preserveViewport: true
       map: @map
+
+  setMark: (latitude, longitude, title) ->
+    @marks.push (new google.maps.Marker
+      position: new google.maps.LatLng(latitude, longitude)
+      map: @map
+      title: title)
+
+  clearMarks: ->
+    mark.setMap(null) for mark in @marks
+    @marks.length = 0
 
   display: ->
     @getCurrentPosition (latitude, longitude) =>
