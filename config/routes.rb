@@ -1,4 +1,6 @@
 Mychelin::Application.routes.draw do
+  resources :posts
+
   get "service/list_restaurants"
 
   resources :restaurants
