@@ -8,7 +8,7 @@ before_filter :admin_user?, :only => [:destroy]
     lng = params[:lng]
 
     @restaurants = if lat && lng
-                     Restaurant.search(lat + ',' + lng)
+                     Restaurant.search(lat, lng)
                    else
                      Restaurant.all
                    end
