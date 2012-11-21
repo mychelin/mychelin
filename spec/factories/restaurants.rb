@@ -2,11 +2,18 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  factory :restaurant do
+    name "restaurant_name"
+    tel "0000112222"
+    url "http://example.com"
+    location"10.0000,20.0000"
+  end
+
   factory :restdata, :class => Restaurant do
     name "aaaa"
     tel "080111122222"
     url "http://test.example.com"
-    location "hoge2"
+    location "10,20"
   end
 
   factory :restdata2, :class => Restaurant do
