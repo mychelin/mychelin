@@ -48,6 +48,12 @@ describe RestaurantsController do
 
 
   describe "GET index" do
+    context "with latitude and longitude" do
+      it "returns restaurants around the point" do
+        Restaurant.should_receive(:search).with('10.000'+','+'20.000')
+        get :index, {lat: '10.000', lng: '20.000'}
+      end
+    end
     it "assigns all restaurants as @restaurants" do
       restaurant = FactoryGirl.create(:restdata)
       get :index, {}, valid_session

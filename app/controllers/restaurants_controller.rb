@@ -4,7 +4,14 @@ before_filter :admin_user?, :only => [:destroy]
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.all
+    lat = params[:lat]
+    lng = params[:lng]
+
+    @restaurants = if lat && lng
+                     Restaurant.search(lat + ',' + lng)
+                   else
+                     Restaurant.all
+                   end
 
     respond_to do |format|
       format.html # index.html.erb
