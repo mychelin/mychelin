@@ -58,4 +58,27 @@ class Map
     else
       error_handler()
 
+  #
+  # watchCurrentPos(callback)
+  #
+  # This method get current position, and set center of map to that position.
+  # Then call `callback` with the current position.
+  # And when center of the map is moved, `callback` is called with new center.
+  # In the callback function, `this` object is the map itself.
+  #
+  # Example:
+  #   watchCurrentPos (latitude, longitude) =>
+  #     this.setMark latitude, longitude, 'sample'
+  #
+  watchCurrentPos: (callback) ->
+    # Initialize center and get restaurants
+    @getCurrentPosition (latitude, longitude) =>
+      @setCenter latitude, longitude
+      callback.call _this, latitude, longitude
+
+    # Only get restaurants
+    google.maps.event.addListener @map, 'dragend', () =>
+      l = @map.getCenter()
+      callback.call _this, l.lat(), l.lng()
+
 $.Map = Map

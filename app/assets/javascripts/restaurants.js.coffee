@@ -17,13 +17,14 @@ $ ->
 
         $('#modal_form').modal('show')
 
-  getPlaces = (map, latitude, longitude) ->
+  getPlaces = (latitude, longitude) ->
     $.get '/service/restaurants',
       latitude: latitude
       longitude: longitude
     , (data) =>
       restaurants_list = $('#restaurants_list')
       if data.status == 'OK'
+        @clearMarks()
         restaurants_list.empty()
         for result in data.results
           entry = $("<li onClick=\"$.load_detail('#{ result.reference }')\">
@@ -34,7 +35,7 @@ $ ->
           restaurants_list.append(entry)
 
           l = result.geometry.location
-          map.setMark(l.lat, l.lng, result.name)
+          @setMark(l.lat, l.lng, result.name)
 
   #
   # Common in /restaurants/*
@@ -48,27 +49,17 @@ $ ->
   # /restaurants/new
   #
   if $('body.restaurants.new').length > 0
-    hook() for hook in load_hook
+    hook.call(this) for hook in load_hook
 
     map = new $.Map('#map_canvas')
-    map.markCenter();
-
-    # Initialize center and get restaurants
-    map.getCurrentPosition (latitude, longitude) ->
-      map.setCenter latitude, longitude
-      getPlaces map, latitude, longitude
-
-    # Only get restaurants
-    google.maps.event.addListener map.map, 'dragend', () =>
-      map.clearMarks()
-      l = map.map.getCenter()
-      getPlaces map, l.lat(), l.lng()
+    map.markCenter()
+    map.watchCurrentPos getPlaces
 
   #
   # /restaurants/show/:id
   #
   else if $('body.restaurants.show').length > 0
-    hook() for hook in load_hook
+    hook.call(this) for hook in load_hook
 
     map = new $.Map('#map_canvas')
     [lat, lng] = $('#map_canvas').data('mychelin-location').split(',')

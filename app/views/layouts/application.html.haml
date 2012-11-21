@@ -21,6 +21,8 @@
               %ul.nav.nav-pills.nav-stacked
                 %li{:class => "#{activate 'restaurants'}"} 
                   = link_to 'Restaurants', restaurants_path
+                %li{:class => "#{activate 'posts'}"} 
+                  = link_to 'Posts', posts_path
             .span9.offset1
               = render 'layouts/messages'
               = yield
