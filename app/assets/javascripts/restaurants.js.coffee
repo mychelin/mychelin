@@ -25,13 +25,15 @@ $ ->
       restaurants_list = $('#restaurants_list')
       if data.status == 'OK'
         @clearMarks()
-        restaurants_list.empty()
+        # Remove list element other than title and map
+        restaurants_list.children().slice(2).remove()
+
         for result in data.results
-          entry = $("<li onClick=\"$.load_detail('#{ result.reference }')\">
-                       <a><h4>#{ result.name }</h4>
+          entry = $("<div class='panel-content' onClick=\"$.load_detail('#{ result.reference }')\">
+                       <div class='panel-inner'><h4>#{ result.name }</h4>
                           #{ result.vicinity }
-                       </a>
-                     </li>")
+                       </div>
+                     </div>")
           restaurants_list.append(entry)
 
           l = result.geometry.location

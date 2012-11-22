@@ -4,9 +4,22 @@
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
+//
+// customizing bootstrap
+//
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover {
   color: $white;
   text-shadow: 0 -1px 0 rgba(0,0,0,.2);
   background-color: $green;
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+  /* color: $gray; */
+  //background-color: $grayLighter;
+  background-color: lighten($green, 30%);
+  /* border: 1px solid #ddd; */
+  /* border-bottom-color: transparent; */
+  /* cursor: default; */
 }

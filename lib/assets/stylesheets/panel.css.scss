@@ -1,0 +1,51 @@
+@import "variables";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+//
+// Stack List
+// --------------------------------------------------
+
+.panel {
+  border: 1px solid #ddd;
+  @include border-radius(4px);
+  margin-bottom: $baseLineHeight;
+}
+
+.panel > a {
+  display: block;
+  padding: 8px 12px;
+
+  &:hover {
+    text-decoration: none;
+    background-color: $grayLighter;
+  }
+}  
+
+// Give the tabs something to sit on
+.panel-stacked {
+  padding: 0;
+  margin: 0 0 $baseLineHeight 0;
+}
+// Make the list-items overlay the bottom border
+.panel-stacked > .panel-stacked-item {
+  border: 1px solid #ddd;
+  padding: 0 12px;
+  line-height: 14px; // keeps the overall height an even number
+  margin-bottom: -1px;
+}
+
+.panel-stacked > a.panel-stacked-item {
+  display: block;
+  text-decoration: none;
+  &:hover {
+    background-color: $grayLighter;
+  }
+}
+
+.panel-stacked > .panel-stacked-item:first-child {
+  @include border-top-radius(4px);
+}
+.panel-stacked > .panel-stacked-item:last-child {
+  @include border-bottom-radius(4px);
+}

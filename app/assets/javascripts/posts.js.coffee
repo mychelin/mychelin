@@ -11,13 +11,13 @@ $ ->
       restaurants_list = $('#restaurants_list')
       if data.length > 0
         @clearMarks()
-        restaurants_list.empty()
+        restaurants_list.children().slice(2).remove()
         for restaurant in data
-          entry = $("<li onClick=\"alert('#{ restaurant.name }')\">
-                       <a><h4>#{ restaurant.name }</h4>
+          entry = $("<div class='panel-content' onClick=\"alert('#{ restaurant.name }')\">
+                       <div class='panel-inner'><h4>#{ restaurant.name }</h4>
                           #{ restaurant.address }
-                       </a>
-                     </li>")
+                       </div>
+                     </div>")
           restaurants_list.append(entry)
 
           [lat, lng] = restaurant.location.split(',')

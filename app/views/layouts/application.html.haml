@@ -17,13 +17,13 @@
       .container
         .content
           .row
-            .span2.sidebar
-              %ul.nav.nav-pills.nav-stacked
+            .span3.sidebar
+              %ul.nav.nav-tabs.nav-stacked
                 %li{:class => "#{activate 'restaurants'}"} 
                   = link_to 'Restaurants', restaurants_path
                 %li{:class => "#{activate 'posts'}"} 
                   = link_to 'Posts', posts_path
-            .span9.offset1
+            .span9
               = render 'layouts/messages'
               = yield
           %footer
