@@ -13,10 +13,9 @@ $ ->
         @clearMarks()
         restaurants_list.children().slice(2).remove()
         for restaurant in data
-          entry = $("<div class='panel-content' onClick=\"alert('#{ restaurant.name }')\">
-                       <div class='panel-inner'><h4>#{ restaurant.name }</h4>
-                          #{ restaurant.address }
-                       </div>
+          entry = $("<a href='javascript:void(0)' class='panel-stacked-item' onClick=\"alert('#{ restaurant.name }')\">
+                       <h4>#{ restaurant.name }</h4>
+                       <p>#{ restaurant.address }</p>
                      </div>")
           restaurants_list.append(entry)
 

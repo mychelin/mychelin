@@ -1,16 +1,11 @@
 - content_for :head do
   = javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=true&language=ja'
 
-#restaurants_list.panel
-  .panel-content
-    .panel-inner
-      %h3 お店をリストに追加
-  .panel-content
-    #map_canvas.panel-inner
+#restaurants_list.panel-stacked
+  .panel-stacked-item
+    %h3 お店をリストに追加
+  #map_canvas.panel-stacked-item
 
-.panel
-  .panel-content
-    .panel-inner
-      = link_to '新しいお店を追加', new_restaurant_path
+.panel= link_to '新しいお店を追加', new_restaurant_path
 
 = link_to 'Back', posts_path

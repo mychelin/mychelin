@@ -1,13 +1,10 @@
 - content_for :head do
   = javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=true&language=ja'
 
-#restaurants_list.panel
-  .panel-content
-    .panel-inner
-      %h3 New restaurant
-  .panel-content
-    #map_canvas.panel-inner
-
+#restaurants_list.panel-stacked
+  .panel-stacked-item
+    %h3 New restaurant
+  .panel-stacked-item#map_canvas
 
 = link_to 'Back', restaurants_path
 

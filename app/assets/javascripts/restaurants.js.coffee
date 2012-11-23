@@ -29,10 +29,9 @@ $ ->
         restaurants_list.children().slice(2).remove()
 
         for result in data.results
-          entry = $("<div class='panel-content' onClick=\"$.load_detail('#{ result.reference }')\">
-                       <div class='panel-inner'><h4>#{ result.name }</h4>
-                          #{ result.vicinity }
-                       </div>
+          entry = $("<a href='javascript:void(0)' class='panel-stacked-item' onClick=\"$.load_detail('#{ result.reference }')\">
+                       <h4>#{ result.name }</h4>
+                       <p>#{ result.vicinity }</p>
                      </div>")
           restaurants_list.append(entry)
 

@@ -2,9 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "bootstrap/mixins";
+@import "mixins";
 
 body.restaurants.new {
+  @include restaurants-map();
+
   #modal_form {
     form {
       margin-bottom: 0;
