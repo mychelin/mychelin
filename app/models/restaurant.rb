@@ -2,6 +2,7 @@
 class Restaurant < ActiveRecord::Base
   attr_accessible :address, :business_hour, :capacity, :credit, :holiday, :location, :name, :parking, :tel, :url
   validates :tel, :format => { :with => /(\d|-)+/ }
+  has_many :posts, :dependent => :destroy
 
   def self.search(latitude, longitude)
     # 緯度(latitude) 1秒 = 約30.8m
