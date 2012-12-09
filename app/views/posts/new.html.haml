@@ -9,3 +9,34 @@
 .panel= link_to '新しいお店を追加', new_restaurant_path
 
 = link_to 'Back', posts_path
+
+#modal_form.modal.hide{:tabindex => "-1",
+                       :role => "dialog",
+                       'aria-labelledby' => "myModalLabel",
+                       'aria-hidden' => "true",
+                       'data-restaurant' => restaurant ||= nil}
+  .modal-header
+    %button.close{:type => "button", 'data-dismiss' => "modal", 'aria-hidden' => "true"}
+      ×
+    %h3#myModalLabel このお店を投稿しますか？
+
+  = form_for Post.new do |f|
+    .modal-body
+      %h4#restaurant_name
+      .field
+        = f.label :comment
+        = f.text_area :comment
+      .field
+        = f.label :photo
+        (現在、使用できません)
+        = f.text_field :photo
+      .field
+        = f.label :star
+        = f.text_field :star
+      .field
+        = f.hidden_field :restaurant_id
+
+    .modal-footer
+      %button.btn{'data-dismiss' => "modal", 'aria-hidden' => "true"}
+        Close
+      = f.submit 'Save', :class => 'btn btn-primary'

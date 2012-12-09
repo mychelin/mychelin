@@ -27,7 +27,14 @@ class PostsController < ApplicationController
     @post = Post.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+        if p = params[:restaurant_id]
+          restaurant = Restaurant.find(params[:restaurant_id])
+          render locals: { restaurant: restaurant.to_json }
+        else
+          render # new.html.erb
+        end
+      end
       format.json { render json: @post }
     end
   end
@@ -41,6 +48,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
