@@ -93,14 +93,14 @@ describe RestaurantsController do
       end
 
       it "assigns a newly created restaurant as @restaurant" do
-          post :create, {:restaurant => FactoryGirl.attributes_for(:restdata)}, valid_session
+        post :create, {:restaurant => FactoryGirl.attributes_for(:restdata)}, valid_session
         assigns(:restaurant).should be_a(Restaurant)
         assigns(:restaurant).should be_persisted
       end
 
-      it "redirects to the created restaurant" do
-          post :create, {:restaurant => FactoryGirl.attributes_for(:restdata)}, valid_session
-        response.should redirect_to(Restaurant.last)
+      it "redirects to a form post" do
+        post :create, {:restaurant => FactoryGirl.attributes_for(:restdata)}, valid_session
+        response.should redirect_to("/posts/new?restaurant_id=#{Restaurant.last.id}")
       end
     end
 
